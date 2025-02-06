@@ -46,9 +46,13 @@ public class SingleNode {
    */
   public List<Integer> toList() {
     List<Integer> result = new ArrayList<>();
+    // start at this ccurent node and keep moving forward
     SingleNode current = this;
+    // going until we have no more nodes
     while (current != null) {
+      // add the current node's data to our list
       result.add(current.data);
+      // move on to the next node
       current = current.next;
     }
     return result;
@@ -63,15 +67,22 @@ public class SingleNode {
    * @throws IllegalArgumentException if the input list is null or empty
    */
   public static SingleNode fromList(List<Integer> values) {
+    // can't bult a linked list if the list is null or empty
+    // so we throw an exception to know something went wrong
     if (values == null || values.isEmpty()) {
       throw new IllegalArgumentException("Input list cannot be null or empty.");
     }
 
+    // make the first node using the first element in 'values'
     SingleNode head = new SingleNode(values.get(0));
+    // keep on track of the "current" node, starting with 'head'
     SingleNode current = head;
 
+    // for the remaining integers, we create new nodes and link them up
     for (int i = 1; i < values.size(); i++) {
+      // build a new node
       current.next = new SingleNode(values.get(i));
+      // advance the pointer
       current = current.next;
     }
 

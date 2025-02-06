@@ -55,10 +55,15 @@ public class DoubleNode {
   public List<Integer> toList() {
     List<Integer> result = new ArrayList<>();
     DoubleNode current = this;
+
+    // move forward through the list until we run out of nodes
     while (current != null) {
+      // take the data from the current node
       result.add(current.data);
+      // then move on to the next node
       current = current.next;
     }
+    // when current is null, we've reached the end of the list
     return result;
   }
 
@@ -71,17 +76,23 @@ public class DoubleNode {
    * @throws IllegalArgumentException if the input list is null or empty
    */
   public static DoubleNode fromList(List<Integer> values) {
+    // we cna't make a list with no data, so we throw an expecation if it's empty or null
     if (values == null || values.isEmpty()) {
       throw new IllegalArgumentException("Input list cannot be null or empty.");
     }
 
+    // create the head using the first item in the list
     DoubleNode head = new DoubleNode(values.get(0));
     DoubleNode current = head;
 
+    // start at i = 1 because we already used the first value
     for (int i = 1; i < values.size(); i++) {
+      // create a new node with the current integer
       DoubleNode newNode = new DoubleNode(values.get(i));
+      // link the new node to the chain
       current.next = newNode;
       newNode.prev = current;
+      // the update 'current' so we can continue building the chain
       current = newNode;
     }
 
